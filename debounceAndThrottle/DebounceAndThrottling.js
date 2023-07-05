@@ -81,3 +81,15 @@ const inputSearch = (e) => {
 }
 $searchBar.addEventListener('input', inputSearch);
 
+$searchBox.addEventListener('mouseover', function (e) {
+  e.target.style.color = "blue";
+  // setTimeout(() => {
+  //   e.target.style.color = "";
+  // }, 500);
+}, false);
+$searchBox.addEventListener('mouseout', function (e) {
+  e.target.style.color = "black";
+  // setTimeout(() => {
+  //   e.target.style.color = "";
+  // }, 500);
+}, false);
