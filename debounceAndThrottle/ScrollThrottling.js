@@ -1,22 +1,36 @@
-const dummyBox = Array(100).fill().map((v, i) => 'dummy box' + i);
-const renderDummyBox = (v) => {
-  const div = document.createElement('div');
-  div.style.height = '300px';
-  div.style.lineHeight = '300px';
-  div.innerText = v;
-  document.querySelector('.data-list').appendChild(div);
+const renderBox = (start, end) => {
+  for (let i = start; i < start + end; i++) {
+    const div = document.createElement('div');
+    div.setAttribute('class', 'dummy-box');
+    div.style.height = '300px';
+    div.style.lineHeight = '300px';
+    div.style.border = '1px';
+    div.style.borderColor = 'black';
+    div.style.borderStyle = 'solid';
+    div.innerHTML = 'dummyBox' + i;
+    document.querySelector('.data-list').appendChild(div);
+  }
 }
-
-for(let i = 0; i < 10; i++){
-  renderDummyBox(dummyBox[i]);
+renderBox(0, 10);
+const loadMoreBox = (moreCnt) => {
+  let dummyBoxCnt = document.querySelectorAll('.dummy-box').length;
+  renderBox(dummyBoxCnt, moreCnt);
 }
+const ioCallback = (entries, io) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      io.unobserve(entry.target);
+      setTimeout(() => {
+        loadMoreBox(10);
+        observeLastItem(io, document.querySelectorAll('.dummy-box'));
+      }, 200);
+    }
+  });
+};
 
-
-// TODO: Throttling  적용해서 특정 위치보다 스크롤이 내려가면 인덱스 몇 번 부터 몇 번까지 불러오기 이런거 length를 이용하든 해보자!
-// dummyBox.forEach((v, i) => {
-//   const div = document.createElement('div');
-//   div.style.height = '300px';
-//   div.style.lineHeight = '300px';
-//   div.innerText = v;
-//   document.querySelector('.data-list').appendChild(div);
-// });
+const observeLastItem = (io, items) => {
+  const lastItem = items[items.length - 1];
+  io.observe(lastItem);
+};
+const io = new IntersectionObserver(ioCallback, {threshold: 0.7});링
+observeLastItem(io, document.querySelectorAll('.dummy-box'));
