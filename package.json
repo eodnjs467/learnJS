@@ -1,0 +1,16 @@
+{
+  "name": "learnjs",
+  "version": "1.0.0",
+  "description": "personal learning project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eodnjs467/learnJS.git"
+  },
+  "keywords": ["throttle", "infinityScroll", "debounce"],
+  "author": "BigOne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eodnjs467/learnJS/issues"
+  },
+  "homepage": "https://github.com/eodnjs467/learnJS#readme"
+}
